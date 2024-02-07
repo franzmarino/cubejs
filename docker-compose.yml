@@ -12,8 +12,6 @@ services:
     ports:
       - 4000:4000
       - 3306:3306
-    environment:
-      - CUBEJS_CUBESTORE_HOST=localhost
     env_file: .env
     depends_on:
       - cubestore
