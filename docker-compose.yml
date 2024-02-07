@@ -1,10 +1,23 @@
 version: "2.2"
 services:
+  cubestore:
+    image: cubejs/cubestore:latest
+    environment:
+      - CUBESTORE_REMOTE_DIR=/cube/data
+    volumes:
+      - .cubestore:/cube/data
+
   cube:
     image: cubejs/cube:latest
     ports:
       - 4000:4000
       - 3306:3306
+    environment:
+      - CUBEJS_CUBESTORE_HOST=localhost
     env_file: .env
+    depends_on:
+      - cubestore
+    links:
+      - cubestore
     volumes:
       - .:/cube/conf
